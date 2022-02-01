@@ -12,9 +12,14 @@ const mix = require('laravel-mix');
  */
 
 mix
-    .js('resources/js/app.js', 'public/js')
-    .sass('resources/scss/app.scss', 'public/css',)
+    .setPublicPath('public')
+    .js('resources/scripts/main.js', 'build/bundle.js')
+    .sass('resources/styles/main.scss', 'build/bundle.css', {}, [
+        require('postcss-axis')
+    ]
+    )
     .browserSync({
-        proxy: 'laravel.test',
+        watch: true,
+        proxy: 'localhost',
         files: ['resources/**/*']
     });
